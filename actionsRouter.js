@@ -3,18 +3,32 @@ const express = require('express');
 const router = express.Router();
 
 const Actions = require('./data/helpers/actionModel.js');
+const Project = require('./data/helpers/projectModel.js');
 
 //CRUD ops
 //POST
 router.post('/actions', (req,res) => {
-    Actions.insert(req.body)
+    // console.log(req.body.project_id)
+    Project.getProjectActions(req.body.project_id)
         .then(action => {
-            console.log(action)
-            res.status(201).json(action)
+            console.log('----------action------------',action)
+            if(action.length === 0 || action.length === null){
+                res.status(500).json("no such project_id")
+            }else{
+                Actions.insert(req.body)
+                .then(action => {
+                    console.log('------------', action)
+                    res.status(201).json(action)
+                })
+                .catch(error => {
+                    res.status(500).json(error)
+                })
+            }
         })
         .catch(error => {
-            res.status(500).json(error)
+            res.status(500).json(error);
         })
+    
 })
 //GET
 router.get('/actions', (req, res) => {
