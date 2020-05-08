@@ -38,24 +38,24 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
-- [x]Mention two parts of Express that you learned about this week.
+- [x] Mention two parts of Express that you learned about this week.
 
 	1.) Express is an easier way to get a server up and running than Node.
 	2.) Express gives you the homies.
 
-- [x]Describe Middleware?
+- [x] Describe Middleware?
 
 	Middleware helps you write code that can be used in multiple places. One example of middleware is 
 	a "logger". A logger can be used globally so that all request handlers make use of it. 
 
-- [x]Describe a Resource?
+- [x] Describe a Resource?
 	A resource is what you have in mind when building an API. It can be something you store on a database
 	that you use a URL to reference or point to. 
 
-- [x]What can the API return to help clients know if a request was successful?
+- [x] What can the API return to help clients know if a request was successful?
 	A response; a response can also let you know what kind of response it is like a 404 error code. 
 
-- [x]How can we partition our application into sub-applications?
+- [x] How can we partition our application into sub-applications?
 	request handlers can be divided up to serve specific resources 
 	
 
