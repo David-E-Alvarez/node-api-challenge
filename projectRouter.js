@@ -15,7 +15,17 @@ router.post('/', (req,res) => {
             res.status(500).json(error)
         })
 })
-// //GET
+//GET
+router.get('/', (req,res) => {
+    Projects.get()
+    .then(project => {
+        res.status(201).json(project)
+    })
+    .catch(error => {
+        res.status(500).json(error)
+    })
+})
+//GET
 // router.get('/:id', (req,res) => {
 //     Projects.get(req.params.id)
 //         .then(project => {

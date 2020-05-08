@@ -27,6 +27,18 @@ router.get('/actions', (req, res) => {
             res.status(500).json(error)
         })
 })
+//GET actions/:id
+router.get('/actions/:id', (req,res) => {
+    Actions.get(req.params.id)
+    .then(actions => {
+        // console.log("something: ", something)
+        res.status(201).json(actions)
+    })
+    .catch(error => {
+        res.status(500).json(error)
+    })
+        
+})
 //UPDATE
 router.put('/actions/:id', (req,res) => {
     Actions.update(req.params.id, req.body)

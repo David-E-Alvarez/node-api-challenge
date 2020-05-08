@@ -2,6 +2,7 @@
 const express = require('express');
 const server = express();
 server.use(express.json());
+// server.use(cors());//react stretch
 
 
 server.get('/', (req, res) => {
