@@ -15,16 +15,16 @@ router.post('/', (req,res) => {
             res.status(500).json(error)
         })
 })
-//GET
-router.get('/:id', (req,res) => {
-    Projects.get(req.params.id)
-        .then(project => {
-            res.status(201).json(project)
-        })
-        .catch(error => {
-            res.status(500).json(error)
-        })
-})
+// //GET
+// router.get('/:id', (req,res) => {
+//     Projects.get(req.params.id)
+//         .then(project => {
+//             res.status(201).json(project)
+//         })
+//         .catch(error => {
+//             res.status(500).json(error)
+//         })
+// })
 //PUT
 router.put('/:id', (req,res) => {
     Projects.update(req.params.id, req.body)
@@ -42,6 +42,18 @@ router.delete('/:id', (req,res) => {
         .then(delProject => {
             // console.log("something: ", something)
             res.status(201).json(delProject)
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
+})
+
+//GET project actions
+router.get('/:id', (req,res) => {
+    Projects.getProjectActions(req.params.id)
+        .then(actions => {
+            console.log('-------->', actions)
+            res.status(201).json(actions)
         })
         .catch(error => {
             res.status(500).json(error)

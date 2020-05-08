@@ -18,7 +18,6 @@ router.post('/actions', (req,res) => {
 })
 //GET
 router.get('/actions', (req, res) => {
-    console.log('req.params.id', req.params.id)
     Actions.get()
         .then(actions => {
             // console.log("something: ", something)
