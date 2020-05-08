@@ -29,6 +29,26 @@ router.get('/actions', (req, res) => {
         })
 })
 //UPDATE
+router.put('/actions/:id', (req,res) => {
+    Actions.update(req.params.id, req.body)
+        .then(updatedAction => {
+            // console.log('------->', something)
+            res.status(201).json(updatedAction)
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
+})
 //DELETE
+router.delete('/actions/:id', (req,res) => {
+    Actions.remove(req.params.id)
+        .then(deletedAction => {
+            console.log('-------->', deletedAction)
+            res.status(201).json(deletedAction)
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
+})
 
 module.exports = router;
