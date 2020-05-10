@@ -8,12 +8,12 @@ const Project = require('./data/helpers/projectModel.js');
 //CRUD ops
 //POST
 router.post('/actions', (req,res) => {
-    // console.log(req.body.project_id)
+    console.log('----this----',req.body.project_id)
     Project.getProjectActions(req.body.project_id)
         .then(action => {
             console.log('----------action------------',action)
             if(action.length === 0 || action.length === null){
-                res.status(500).json("no such project_id")
+                res.status(500).json("project with specified id not in database")
             }else{
                 Actions.insert(req.body)
                 .then(action => {
