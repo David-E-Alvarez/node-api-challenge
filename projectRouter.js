@@ -16,7 +16,7 @@ router.post('/', (req,res) => {
         })
 })
 //GET
-router.get('/', (req,res) => {
+router.get('/',(req,res) => {
     Projects.get()
     .then(project => {
         res.status(201).json(project)
@@ -25,21 +25,11 @@ router.get('/', (req,res) => {
         res.status(500).json(error)
     })
 })
-//GET
-// router.get('/:id', (req,res) => {
-//     Projects.get(req.params.id)
-//         .then(project => {
-//             res.status(201).json(project)
-//         })
-//         .catch(error => {
-//             res.status(500).json(error)
-//         })
-// })
 //PUT
-router.put('/:id', (req,res) => {
+router.put('/:id',(req,res) => {
     Projects.update(req.params.id, req.body)
         .then(updatedProject => {
-            // console.log("something: ", something)
+            console.log("something: ", something)
             res.status(201).json(updatedProject)
         })
         .catch(error => {
@@ -48,25 +38,30 @@ router.put('/:id', (req,res) => {
 })
 //DELETE
 router.delete('/:id', (req,res) => {
-    Projects.remove(req.params.id)
-        .then(delProject => {
-            // console.log("something: ", something)
-            res.status(201).json(delProject)
-        })
-        .catch(error => {
-            res.status(500).json(error)
-        })
+    
 })
 
 //GET project actions
-router.get('/:id', (req,res) => {
+router.get('/:id',(req,res) => {
     Projects.getProjectActions(req.params.id)
         .then(actions => {
-            console.log('-------->', actions)
+            console.log("actions---------->", actions)
+            if(actions.length === 0 || actions.length === null){
+                res.status(404).json("project doesnt exist")
+            }
             res.status(201).json(actions)
         })
         .catch(error => {
             res.status(500).json(error)
         })
+
 })
+
+//middleware
+//, validateProjectId
+// function validateProjectId(req,res,next){
+    
+// }
+
 module.exports = router;
+

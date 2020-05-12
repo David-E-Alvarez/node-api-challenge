@@ -9,26 +9,24 @@ const Project = require('./data/helpers/projectModel.js');
 //POST
 router.post('/actions', (req,res) => {
     // console.log(req.body.project_id)
-    Project.getProjectActions(req.body.project_id)
-        .then(action => {
-            console.log('----------action------------',action)
-            if(action.length === 0 || action.length === null){
-                res.status(500).json("no such project_id")
+    Project.get(req.body.project_id)
+        .then(proj => {
+            if(proj.length === 0){
+                res.status(400).json("project doesnt exist")
             }else{
                 Actions.insert(req.body)
-                .then(action => {
-                    console.log('------------', action)
-                    res.status(201).json(action)
-                })
-                .catch(error => {
-                    res.status(500).json(error)
-                })
+                    .then(action => {
+                        console.log("action: ------->",action)
+                        res.status(201).json(action)
+                    })
+                    .catch(error => {
+                        res.status(500).json(error)
+                    })
             }
         })
         .catch(error => {
-            res.status(500).json(error);
+            res.status()
         })
-    
 })
 //GET
 router.get('/actions', (req, res) => {
