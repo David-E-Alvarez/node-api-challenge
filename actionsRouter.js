@@ -41,22 +41,27 @@ router.get('/actions', (req, res) => {
 })
 //GET actions/:id
 router.get('/actions/:id', (req,res) => {
+    console.log("req.paramserere.id", req.params.id)
     Actions.get(req.params.id)
-    .then(actions => {
-        // console.log("something: ", something)
-        res.status(201).json(actions)
-    })
-    .catch(error => {
-        res.status(500).json(error)
-    })
+        .then(action => {
+            console.log("action: ", action)
+            if(action === null){
+                res.status(400).json("action with specified id doesnt exist")
+            }else{
+                res.status(201).json(action)
+            }
+        })
+        .catch(error => {
+            res.status(500).json(error)
+        })
         
 })
 //UPDATE
 router.put('/actions/:id', (req,res) => {
-    Actions.update(req.params.id, req.body)
-        .then(updatedAction => {
-            // console.log('------->', something)
-            res.status(201).json(updatedAction)
+    Project.getProjectActions(req.params.id)
+        .then(projActions => {
+            console.log("projActions.length: ", projActions.length)
+            res.status(201).json(projActions)
         })
         .catch(error => {
             res.status(500).json(error)

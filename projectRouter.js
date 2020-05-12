@@ -27,10 +27,22 @@ router.get('/',(req,res) => {
 })
 //PUT
 router.put('/:id',(req,res) => {
-    Projects.update(req.params.id, req.body)
-        .then(updatedProject => {
-            console.log("something: ", something)
-            res.status(201).json(updatedProject)
+    console.log("req.params.id: ", req.params.id)
+    Projects.get(req.params.id)
+        .then(projects => {
+            console.log("projects: ", projects)
+            if(projects === null){
+                res.status(400).json("project doesnt exist")
+            }else{
+                Projects.update(projects.id, req.body)
+                    .then(updatedProject => {
+                        res.status(201).json(updatedProject)
+                    })
+                    .catch(error => {
+                        res.status(500).json(error)
+                    })
+            }
+            
         })
         .catch(error => {
             res.status(500).json(error)
