@@ -58,13 +58,28 @@ router.get('/actions/:id', (req,res) => {
 })
 //UPDATE
 router.put('/actions/:id', (req,res) => {
-    Project.getProjectActions(req.params.id)
+    Project.getProjectActions(req.body.project_id)
         .then(projActions => {
-            console.log("projActions.length: ", projActions.length)
-            res.status(201).json(projActions)
+            console.log("projActions: ", projActions)
+            if(!projActions[0].project_id){
+                res.status(400).json("project doesnt exist")
+            }else{
+                Actions.update(req.params.id, req.body)
+                    .then(updatedAction => {
+                        console.log("updatedAction", updatedAction)
+                        if(updatedAction === null){
+                            res.status(400).json("action doesnt exist")
+                        }else{
+                            res.status(201).json(updatedAction)
+                        }
+                    })
+                    .catch(error => {
+                        res.status(500).json(error)
+                    })
+            }
         })
         .catch(error => {
-            res.status(500).json(error)
+            res.status(500).json("no project with given project id")
         })
 })
 //DELETE
