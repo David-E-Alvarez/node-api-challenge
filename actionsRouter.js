@@ -87,7 +87,11 @@ router.delete('/actions/:id', (req,res) => {
     Actions.remove(req.params.id)
         .then(deletedAction => {
             console.log('-------->', deletedAction)
-            res.status(201).json(deletedAction)
+            if(deletedAction === 0){
+                res.status(400).json("no action with specified id")
+            }else{
+                res.status(201).json(deletedAction)
+            }
         })
         .catch(error => {
             res.status(500).json(error)
