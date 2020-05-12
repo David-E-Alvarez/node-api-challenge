@@ -50,7 +50,21 @@ router.put('/:id',(req,res) => {
 })
 //DELETE
 router.delete('/:id', (req,res) => {
-    
+    Projects.get(req.params.id)
+        .then(projects => {
+            console.log("projects: ", projects)
+            if(projects === null){
+                res.status(400).json("project doesnt exist")
+            }else{
+                Projects.remove(projects.id)
+                    .then(delProj => {
+                        res.status(201).json(delProj)
+                    })
+                    .catch(error => {
+                        res.status(500).json(error)
+                    })
+            }
+        })
 })
 
 //GET project actions
